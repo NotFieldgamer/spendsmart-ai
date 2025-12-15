@@ -83,15 +83,15 @@ export default function Dashboard() {
       }
 
       // optional: subscription advice (non-fatal)
-      try {
-        if (typeof fetchSubscriptionAdvice === "function") {
-          const adv = await fetchSubscriptionAdvice(token);
-          setSubAdvice(adv.data?.advice || null);
-        }
-      } catch (err) {
-        console.warn("Subscription advice not available or failed:", err?.message || err);
-        setSubAdvice(null);
-      }
+      // try {
+      //   if (typeof fetchSubscriptionAdvice === "function") {
+      //     const adv = await fetchSubscriptionAdvice(token);
+      //     setSubAdvice(adv.data?.advice || null);
+      //   }
+      // } catch (err) {
+      //   console.warn("Subscription advice not available or failed:", err?.message || err);
+      //   setSubAdvice(null);
+      // }
     } catch (err) {
       console.error("Dashboard load error:", err);
     } finally {

@@ -13,7 +13,7 @@ export const fetchBudgetAdvice = (token) =>
   });
 
 export const fetchSubscriptionAdvice = (token) =>
-  axios.get("http://localhost:5000/api/ai/subscriptions-cancellation", {
+  axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/ai/subscriptions-cancellation`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/budgets";
+const API = `${import.meta.env.VITE_API_BASE_URL}/api/budgets`;
 
 export const getBudgets = (token, month) =>
   axios.get(API, {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/ai";
+const API = `${import.meta.env.VITE_API_BASE_URL}/api/ai`;
 
 export const magicScanReceipt = async (token, imageBase64, mimeType) => {
   return axios.post(

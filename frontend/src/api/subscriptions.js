@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/subscriptions";
+const API = `${import.meta.env.VITE_API_BASE_URL}/api/subscriptions`;
 
 export const getSubscriptions = (token) =>
   axios.get(API, {
