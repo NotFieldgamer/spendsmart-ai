@@ -20,7 +20,7 @@ import alertRoutes from "./routes/alertRoutes.js";
 const app = express();
 
 app.use(cors({
-  origin: "*",
+  origin: "https://spendsmart-ai.vercel.app/",
   credentials:true,
 }));
 app.use(express.json({ limit: "10mb" }));
