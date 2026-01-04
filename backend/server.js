@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();              // LOAD ENV FIRST
+dotenv.config();
 
 import express from "express";
 import cors from "cors";
@@ -12,22 +12,50 @@ import aiRoutes from "./routes/aiRoutes.js";
 import budgetRoutes from "./routes/budgetRoutes.js";
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
 import pushRoutes from "./routes/pushRoutes.js";
-import "./cron/renewalChecker.js";
-import "./cron/subscriptionReminder.js"
-import subscriptionReminder from "./cron/subscriptionReminder.js";
 import alertRoutes from "./routes/alertRoutes.js";
+
+import "./cron/renewalChecker.js";
+import "./cron/subscriptionReminder.js";
+import subscriptionReminder from "./cron/subscriptionReminder.js";
 
 const app = express();
 
+/* =======================
+   ✅ CORS (FIXED)
+======================= */
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://spendsmart-psi.vercel.app"
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://spendsmart-psi.vercel.app/"
-  ],
+  origin: (origin, callback) => {
+    // allow Postman / server-side requests
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("CORS not allowed"));
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
+// ✅ THIS IS CRITICAL
+app.options("*", cors());
+
+/* =======================
+   Middleware
+======================= */
+
 app.use(express.json({ limit: "10mb" }));
+
+/* =======================
+   Routes
+======================= */
 
 app.get("/", (req, res) => {
   res.json({ status: "ok", app: "SpendSmart AI" });
@@ -42,6 +70,9 @@ app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/push", pushRoutes);
 app.use("/api/alerts", alertRoutes);
 
+/* =======================
+   Server
+======================= */
 
 const PORT = process.env.PORT || 5000;
 
@@ -55,4 +86,4 @@ mongoose
     console.error("Mongo error:", err);
   });
 
-setInterval(subscriptionReminder , 1000*60*60*12);
+setInterval(subscriptionReminder, 1000 * 60 * 60 * 12);
