@@ -45,7 +45,7 @@ app.use(cors({
 }));
 
 // ✅ THIS IS CRITICAL
-app.options("*", cors());
+app.options("/*", cors());
 
 /* =======================
    Middleware
