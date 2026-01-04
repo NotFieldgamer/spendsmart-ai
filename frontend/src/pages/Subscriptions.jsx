@@ -24,7 +24,7 @@ export default function Subscriptions() {
   const load = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/subscriptions",
+        `${API_BASE_URL}/api//subscriptions`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -65,7 +65,7 @@ export default function Subscriptions() {
       setError("");
 
       await axios.post(
-        "http://localhost:5000/api/subscriptions",
+        `${API_BASE_URL}/api/subscriptions`,
         {
           name,
           amount,
@@ -92,7 +92,7 @@ export default function Subscriptions() {
     if (!confirm("Cancel this subscription?")) return;
 
     await axios.delete(
-      `http://localhost:5000/api/subscriptions/${id}`,
+      `${API_BASE_URL}/api/subscriptions/${id}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     load();

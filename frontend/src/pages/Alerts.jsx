@@ -11,7 +11,7 @@ export default function Alerts() {
     if (!token) return;
 
     axios
-      .get("http://localhost:5000/api/alerts", {
+      .get(`${API_BASE_URL}/api/alerts`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

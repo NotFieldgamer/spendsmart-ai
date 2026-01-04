@@ -6,7 +6,7 @@ export const subscribeUserToPush = async (publicKey, token) => {
     applicationServerKey: urlBase64ToUint8Array(publicKey),
   });
 
-  await fetch("http://localhost:5000/api/push/subscribe", {
+  await fetch(`${API_BASE_URL}/api/push/subscribe`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,

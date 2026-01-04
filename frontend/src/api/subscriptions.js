@@ -28,11 +28,11 @@ export const scanSubscriptions = (token) =>
   });
 
 export const getSubscriptionAlerts = (token) =>
-  axios.get("http://localhost:5000/api/subscriptions/alerts/renewals", {
+  axios.get(`${API_BASE_URL}/api/subscriptions/alerts/renewals`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
 export const getAllAlerts = (token) =>
-  axios.get("http://localhost:5000/api/subscriptions/alerts/renewals", {
+  axios.get(`${API_BASE_URL}/api/subscriptions/alerts/renewals`, {
     headers: { Authorization: `Bearer ${token}` },
   });
